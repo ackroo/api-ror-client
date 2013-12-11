@@ -1,0 +1,1 @@
+ENV['SSL_CERT_FILE'] = Rails.root.join('lib/ackroo.pem').to_s

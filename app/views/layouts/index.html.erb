@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Api Client</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <%= stylesheet_link_tag "bootstrap.min", :media => "all" %>
+    <%= stylesheet_link_tag "bootstrap-responsive", :media => "all" %>
+  	<%= csrf_meta_tags %>
+    <style type="text/css">
+        body {
+            background: #efefef;
+        }
+
+        form {
+            margin: 0px !important;
+        }
+    </style>
+
+</head>
+<body>
+    
+	 	
+	<%= yield %>
+		
+
+    <%= javascript_include_tag "jquery-1.9.1.min.js" %>
+    <%= javascript_include_tag "bootstrap.min.js" %>
+
+</body>
+</html>

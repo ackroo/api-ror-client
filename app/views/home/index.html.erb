@@ -1,0 +1,39 @@
+<div class="container">
+
+        <!-- Main content -->
+        <div class="row" style="margin-top: 5%;">
+          <%= form_tag :action => "test" do %>
+             <fieldset>
+
+                  <div class="span6 offset3">
+                    <div class="well">
+
+                      <div class="text-center">
+                        <%= label_tag 'title', 'Application installed successfully. You now have an OAuth Access token', :style => "margin-top: 5%; margin-bottom:10%; max-width:600px; max-height:200px;" %>
+                      </div>
+
+
+
+                      <div class="text-center">
+                          <% if !@result.blank? %>
+                            <%= label_tag 'Api Test', @result, :style => "margin-top: 5%; margin-bottom:10%; max-width:600px; max-height:200px;" %>
+                          <% else %>
+                            <div class="text-center">
+                              <%= submit_tag("Test API", :class => "span2 btn btn-flat btn-primary ")%>
+                            </div>
+                          <% end %>
+                      </div>
+
+                    </div>
+                  </div>
+             </fieldset>
+          <% end %>
+        </div>
+  <style>
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+  </style>
+</div>

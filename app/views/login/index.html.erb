@@ -1,0 +1,43 @@
+<div class="container">
+
+        <!-- Main content -->
+        <div class="row" style="margin-top: 5%;">
+
+                <%= form_tag :action => "login" do %>
+                    <fieldset>
+                      <div class="span6 offset3">
+                        <div class="well">
+
+                            <div class="text-center">
+                              <%= label_tag 'title', 'Welcome to Ackroo API client demo application. Click below to start the API Authorization process', :style => "margin-top: 5%; margin-bottom:10%; max-width:600px; max-height:200px;" %>
+
+                              <p style="padding-bottom: 1em;">
+                                <span class="hint">Don&rsquo;t have an ackroo developer account to install your application? <a href= <%= Rails.application.config.dev_url %> >Create an ackroo application.</a></span>
+                              </p>
+                            </div>
+
+                            <% if !flash[:notice].blank? %>
+                            <div class="alert">
+                                <%= flash[:notice] %>
+                                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            </div>
+                            <% end %>
+
+                            <div class="text-center">
+                                <%= submit_tag("Install", :class => "span2 btn btn-flat btn-primary ")%>
+                            </div>
+
+                        </div>
+                      </div>
+                    </fieldset>
+                <% end %> 
+
+        </div>
+  <style>
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+  </style>
+</div>
