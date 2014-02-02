@@ -66,14 +66,14 @@ ApiClient::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # For production environment
-  config.dev_url = 'https://dev.ackroo.com'
-  config.api_url = 'https://api.ackroo.com'
+  config.dev_url = 'https://developer.ackroo.com'
+  config.api_url = 'https://api.ackroo.net'
   config.oauth_provider = 'https://manage.ackroo.com'
 
   # Set the Ackroo Developer application id, secret, and redirect_uri. All 3 should match the application you created in developer portal
   # Otherwise, you will get an authorization failure
-  config.client_id = 'b3e140beae7d136648079745e2dee74160f2f7494ac226e8a514c9b53e4612c4'
-  config.client_secret = 'dad6668c918037304f52626296f386e3f7dc77687bb4ea914b4f6d3585337eb5'
+  config.client_id = ''
+  config.client_secret = ''
   # This is your Rails server hostname running this application. Typically localhost running on port 3000 for development testing
   # This would need to change to external hostname of your Rails application once it goes production/live
   config.redirect_uri = 'http://localhost:3000'

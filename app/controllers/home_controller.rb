@@ -15,17 +15,30 @@ class HomeController < ApplicationController
     render action: 'index'
   end
 
-  def http_get_using_headers(uri)
+  def test_card_balance
+    uri = URI.parse(@api_url + "/cardholder/balance")
+
+    # 2 options to calling API with oauth access token, setting as Bearer in Header, or just as form parameter
+    card_number_param = { 'cardnumber' => 'xxx' }
+    @result = http_get_using_headers(uri, card_number_param).body
+    #@result = http_get_using_params(uri, card_number_param).body
+
+    render action: 'index'
+  end
+
+  def http_get_using_headers(uri, params = {})
     headers = { 'Authorization' => "Bearer #{session[:oauth_access_token]}" }
     request = Net::HTTP::Get.new(uri.path, headers)
+    request.set_form_data( params) unless params.blank?
     http_client = http_client_ssl(uri)
     @result = http_client.request(request)
   end
 
-  def http_get_using_params(uri)
+  def http_get_using_params(uri, params = {})
     request = Net::HTTP::Get.new(uri.path)
-    params = { 'access_token' => session[:oauth_access_token] }
-    request.set_form_data( params)
+    access_token_param = { 'access_token' => session[:oauth_access_token] }
+    params = params.merge(access_token_param)
+    request.set_form_data( params) unless params.blank?
     http_client = http_client_ssl(uri)
     @result = http_client.request(request)
   end

@@ -1,1 +1,1 @@
-ENV['SSL_CERT_FILE'] = Rails.root.join('lib/ackroo.pem').to_s
+ENV['SSL_CERT_FILE'] = Rails.root.join('lib/cacert.pem').to_s
