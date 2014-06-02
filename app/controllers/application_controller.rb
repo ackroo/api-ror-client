@@ -33,4 +33,29 @@ class ApplicationController < ActionController::Base
     return false
   end
 
+
+  def http_get(uri, params = {})
+    headers = { 'Authorization' => "Bearer #{session[:oauth_access_token]}" }
+    request = Net::HTTP::Get.new(uri.path, headers)
+    request.set_form_data( params) unless params.blank?
+    http_client = http_client_ssl(uri)
+    @result = http_client.request(request)
+  end
+
+  def http_post(uri, params = {})
+    headers = {'Authorization' => "Bearer #{session[:oauth_access_token]}"}
+    request = Net::HTTP::Post.new( uri.path , headers)
+    request.set_form_data(params) unless params.blank?
+    http_client = http_client_ssl(uri)
+    @result = http_client.request(request)
+  end
+
+  def http_client_ssl(uri)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.ca_file = ENV['SSL_CERT_FILE']
+    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    return http
+  end
+
 end

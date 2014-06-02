@@ -45,9 +45,9 @@ ApiClient::Application.configure do
   config.client_secret = ''
   # This is your Rails server hostname running this application. Typically localhost running on port 3000 for development testing
   # This would need to change to external hostname of your Rails application once it goes production/live
-  config.redirect_uri = 'http://localhost:3000'
+  config.redirect_uri = 'http://localhost:3030'
 
   # A Space deliimited string of scopes. Check API guide for more info
   # e.g. 'card transaction'. Set to only cardholder scope at the moment
-  config.oauth_scopes = 'card'
+  config.oauth_scopes = 'card terminal transaction'
 end

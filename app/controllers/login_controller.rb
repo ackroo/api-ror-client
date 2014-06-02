@@ -3,7 +3,7 @@ class LoginController < ApplicationController
 
   def index
     # Clear out session if you wish to get rid of oauth token in session
-    # reset_session
+    reset_session
     if (!session[:oauth_access_token].blank?)
       redirect_to(:controller => "home", :action => "index")
       return
@@ -17,6 +17,7 @@ class LoginController < ApplicationController
         return
       end
       user_session($access_token.token)
+      get_device(code)
       redirect_to(:controller => "home", :action => "index")
       return
     end
@@ -33,6 +34,13 @@ class LoginController < ApplicationController
     session[:oauth_access_token] = token
   end
 
+  def get_device(code)
+    uri = URI.parse(@api_url + "/device")
+    @result = http_get(uri, { :code => code })
+    parsed_result = JSON.parse(@result.body)
+    session[:device_id] = parsed_result["device"]
+  end
+
   def setup_oauth_auth_url
     extra_params = { :redirect_uri => Rails.application.config.redirect_uri, :scope => Rails.application.config.oauth_scopes }
     authorize_params = @oauth_client.auth_code.authorize_params
@@ -43,10 +51,4 @@ class LoginController < ApplicationController
     return authorize_url
   end
 
-  def http_get(uri)
-    headers = { 'Authorization' => "Bearer #{session[:oauth_access_token]}" }
-    request = Net::HTTP::Get.new(uri.path, headers)
-    http = Net::HTTP.new(uri.host, uri.port)
-    @result = http.request(request)
-  end
 end
